@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Etch-a-Sketch</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Girassol&display=swap');
+	</style> 
+</head>
+<body>
+	<div class="rowTop">
+		<div class="button">
+			<h1>Etch a Sketch</h1>
+			<button onclick="ask()">Restart</button>
+		</div>
+	</div>
+	<div class="grid-container" id="container">
+		
+	</div>
+
+	<script type="text/javascript">
+		var container = document.getElementById('container');
+		function ask() {
+			// body...
+			var sidelength = 0;
+			sidelength = prompt('How may squares should the new grid have on each Sider?', '16');
+			var x = document.getElementById('container').childElementCount;
+			for (var i = 0; i < x; i++) {
+				    var element = document.getElementById(''+i);
+    				element.parentNode.removeChild(element);
+			}
+			newGrid(sidelength);
+		}
+
+		function newGrid(side) {
+			// body...
+			var stringTemplateColums = "";
+			for (var i = 0; i < side; i++) {
+				stringTemplateColums = stringTemplateColums.concat("auto ");
+			}
+			container.style.gridTemplateColumns = stringTemplateColums;
+			for (var i = 0; i < (side*side); i++) {
+				var grid = document.createElement('grid');
+				grid.id = i;
+				grid.classList.add('grid-item');
+				grid.style.background = 'white';
+				container.appendChild(grid);;
+			}
+
+			const grids = document.querySelectorAll('grid');
+			grids.forEach((grid) => {
+				grid.addEventListener('mouseenter', (e) => {
+					var color = document.getElementById(grid.id).style.backgroundColor;
+					switch (color){
+						case "white":
+							document.getElementById(grid.id).style.background = 
+							"yellow";
+							break;
+						case "yellow":
+							document.getElementById(grid.id).style.background = 
+							"orange";
+							break;
+						case "orange":
+							document.getElementById(grid.id).style.background = 
+							"orangered";
+							break;
+						case "orangered":
+							document.getElementById(grid.id).style.background = 
+							"red";
+							break;
+						case "red":
+							document.getElementById(grid.id).style.background = 
+							"crimson";
+							break;
+						case "crimson":
+							document.getElementById(grid.id).style.background = 
+							"magenta";
+							break;
+						case "magenta":
+							document.getElementById(grid.id).style.background = 
+							"blueviolet";
+							break;
+						case "blueviolet":
+							document.getElementById(grid.id).style.background = 
+							"darkslateblue";
+							break;
+						case "darkslateblue":
+							document.getElementById(grid.id).style.background = 
+							"indigo";
+							break;
+						case "indigo":
+							document.getElementById(grid.id).style.background = 
+							"white";
+							break;
+					}
+				})
+			})
+		}
+		newGrid(16);
+	</script>
+</body>
+</html>
